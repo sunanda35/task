@@ -39,11 +39,10 @@ module.exports = {
   getProducts: async (req, res, next) => {
     try {
       const noOfProducts = req.params.noOfProducts;
-      console.log(noOfProducts);
       const products = await productModel
         .find()
         .sort({ totalSalesPrice_usd: -1 })
-        .limit(10);
+        .limit(parseInt(noOfProducts));
       res.send(products);
     } catch (err) {
       next(err);
